@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}
+
+{% block title %} Login page {% endblock %}
+
+<link rel="stylesheet" href="/static/login.css">
+
+
+{% block content %}
+<div class = "text-center">
+  <form action="{% url "login" %}" method="POST" class="form-signin">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="">
+    <img class="mb-4" src="{{ STATIC_URL }}/static/logo.svg" alt="" width="72" height="72">
+
+    <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
+    <label for="username" class="sr-only">Email</label>
+    <input type="text" id="username" class="form-control" placeholder="Email" name="username"
+           value="" required="" autofocus="" data-cip-id="username">
+    <label for="Password" class="sr-only">Password</label>
+    <input type="password" id="password" class="form-control" placeholder="Пароль"
+           name="password" required="" data-cip-id="password">
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+
+  </form>
+</div>
+<a href="{% url "signup" %}">Регистрация</a>
+{% endblock %}

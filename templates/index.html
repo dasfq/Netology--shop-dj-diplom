@@ -1,0 +1,39 @@
+{% extends "shop/base.html" %}
+{% load filters %}
+
+{% block title %}
+  Graduation Work
+{% endblock %}
+
+{% block content %}
+
+<main role="main">
+  {% for article in articles %}
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-4">{{ article.title }}</h1>
+      <p>{{ article.sub_title }}<a href="{% url "category" article.category.id %}"> >>> {{ article.category.name }}</a></p>
+    </div>
+  </div>
+
+
+  <div class="container mb-5">
+    <!-- Example row of columns -->
+    <div class="row">
+      {% for item in article.category.item_set.all|number_items:3 %}
+      <div class="col-md-4">
+        <h2>{{ item.name }}</h2>
+
+        <a href="{% url "item_page" item.id %}">
+          <img src="{{ STATIC_URL }}/{{ item.image }}" width="180">
+        </a>
+        {% include 'shop/add_to_cart_btn.html' %}
+      </div>
+      {% endfor %}
+
+    </div>
+  </div> <!-- /container -->
+  {% endfor %}
+</main>
+
+{% endblock %}

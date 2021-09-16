@@ -1,0 +1,9 @@
+body {
+  padding-top: 3.5rem;
+}
+
+.pagination {
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+}

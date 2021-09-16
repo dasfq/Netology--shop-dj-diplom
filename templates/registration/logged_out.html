@@ -1,0 +1,10 @@
+{% extends "shop/base.html" %}
+
+{% block title %} Logged out! {% endblock %}
+
+{% block content %}
+
+Пока!
+<a href="{% url "login" %}">Войти</a>
+<a href="{% url "signup" %}">Регистрация</a>
+{% endblock %}

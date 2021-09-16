@@ -1,0 +1,64 @@
+{% extends "shop/base.html" %}
+{% load filters %}
+
+{% block title %} Item information {% endblock %}
+
+
+{% block content %}
+
+<main role="main">
+
+
+  <div class="container mt-3">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{{ item.name }}</h2>
+
+        <img src="{{ STATIC_URL }}/{{ item.image }}" width="120">
+
+        <p>{{ item.description }}</p>
+        {% include 'shop/add_to_cart_btn.html' %}
+      </div>
+    </div>
+
+    {% for review in item.review_set.all %}
+    <hr>
+
+    {{ review.stars|rate_stars }} <span>{{ review.user }}</span>
+    <p>{{ review.text }}</p>
+
+    {% endfor %}
+
+    <hr>
+
+    <div class="row">
+      <div class="col-lg-6 col-md-8 col-sm-12">
+        <h4>Оставьте отзыв:</h4>
+
+        {% if user.is_authenticated %}
+
+        <form action="{% url 'item_page' item.id %}" method="post">
+          {% csrf_token %}
+
+          <div class="form-group">
+          {{ form.stars }}
+          {{ form.text.errors }}
+          {{ form.text.label_tag }}
+          {{ form.text }}
+
+          </div>
+          <button type="submit" class="btn btn-primary">Оставить</button>
+        </form>
+        {% else %}
+        Please log in
+        {% endif %}
+      </div>
+    </div>
+
+  </div> <!-- /container -->
+
+</main>
+
+{% endblock %}
+

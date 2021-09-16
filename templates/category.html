@@ -1,0 +1,44 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<main role="main">
+
+  <div class="container">
+    <!-- Example row of columns -->
+
+    <h1>{{ category }}</h1>
+
+    <div class="row">
+
+      {% for item in items %}
+      <div class="col-md-4">
+        <h2>{{ item.name }}</h2>
+
+        <a href="{% url "item_page" item.id %}">
+
+          <img src="{{ STATIC_URL }}/{{ item.image }}" width="180">
+
+        </a>
+
+        {% include 'shop/add_to_cart_btn.html' %}
+      </div>
+
+      {% endfor %}
+
+    </div> <!-- /container -->
+
+  </div>
+  <div class="pagination">
+  {% if prev_page_url %}
+   <a class="button button-primary" href="{{ prev_page_url }}"><<< </a>
+  {% endif %}
+   <a href=""> | {{ current_page }} |</a>
+  {% if next_page_url %}
+   <a class="button button-primary" href="{{ next_page_url }}"> >>> </a>
+  {% endif %}
+  </div>
+</main>
+
+{% endblock %}
